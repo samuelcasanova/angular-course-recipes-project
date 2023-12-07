@@ -1,8 +1,8 @@
-<app-header/>
+<app-header (changedView)="onChangedView($event)"/>
 <div>
-  <app-shopping-list/>
-  <app-shopping-list-edit/>
+  <app-shopping-list *ngIf="currentView === views.ShoppingList"/>
+  <app-shopping-list-edit *ngIf="currentView === views.ShoppingList"/>
 </div>
 <div>
-  <app-recipe-book/>
+  <app-recipe-book *ngIf="currentView === views.Recipes"/>
 </div>
