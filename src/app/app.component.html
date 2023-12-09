@@ -1,7 +1,6 @@
 <app-header (changedView)="onChangedView($event)"/>
 <div>
   <app-shopping-list *ngIf="currentView === views.ShoppingList"/>
-  <app-shopping-list-edit *ngIf="currentView === views.ShoppingList"/>
 </div>
 <div>
   <app-recipe-book *ngIf="currentView === views.Recipes"/>
