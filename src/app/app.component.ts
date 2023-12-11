@@ -7,7 +7,7 @@ import { Views } from './common/header/header.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  currentView = Views.Recipes
+  currentView = Views.ShoppingList
   views = Views
 
   onChangedView(newView: Views) {
