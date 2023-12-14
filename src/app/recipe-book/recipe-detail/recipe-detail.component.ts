@@ -14,4 +14,8 @@ export class RecipeDetailComponent {
       this.recipe = selectedRecipe
     })
   }
+
+  onToShoppingList() {
+    this.recipeService.recipeIngredientsToShoppingList(this.recipe)
+  }    
 }
