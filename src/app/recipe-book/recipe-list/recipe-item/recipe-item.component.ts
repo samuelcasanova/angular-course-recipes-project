@@ -10,24 +10,9 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class RecipeItemComponent implements OnInit {
   @Input() recipe: Recipe
-  isSelected: boolean
+  @Input() index: number
 
-  constructor(private recipeService: RecipeService, private router: Router, private route: ActivatedRoute) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      const index = +params['index']
-      this.isSelected = index === this.getIndex()
-    })
-  }
-
-  onRecipeSelected() {
-    const selectedIndex = this.getIndex()
-    this.router.navigate([selectedIndex], { relativeTo: this.route })
-  }
-
-  private getIndex(): number {
-    const recipes = this.recipeService.getRecipes();
-    return recipes.indexOf(this.recipe) ?? 0
-  }
+  ngOnInit(): void {}
 }
