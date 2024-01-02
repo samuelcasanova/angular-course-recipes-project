@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipeService } from './recipe-book/recipe.service';
 import { EmptyRecipeDetailComponent } from './recipe-book/empty-recipe-detail/empty-recipe-detail.component';
 import { RecipeEditComponent } from './recipe-book/recipe-edit/recipe-edit.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { RecipeEditComponent } from './recipe-book/recipe-edit/recipe-edit.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [ShoppingListService, RecipeService],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import { Subject } from "rxjs";
 import { Ingredient } from "../common/ingredient.model";
 export class ShoppingListService {
   shoppingListSubject = new Subject<Ingredient[]>()
+  editIngredientSubject = new Subject<Ingredient>()
   
   private ingredients: Ingredient[]
   
