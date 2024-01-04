@@ -14,18 +14,18 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   @ViewChild('nameInput') nameInput: ElementRef<HTMLInputElement>
   @ViewChild('quantityInput') quantityInput: ElementRef<HTMLInputElement>
   @ViewChild('shoppingListForm') shoppingListForm: NgForm
-  editIngredientSubscription: Subscription
+  private editIngredientSubscription: Subscription
   editMode: boolean = false
   editedIngredientIndex: number | null = null
   
   constructor(private shoppingListService: ShoppingListService) {}
   
   ngOnInit(): void {
-    this.shoppingListService.editIngredientSubject.subscribe((index) => this.onEditIngredient(index))
+    this.editIngredientSubscription = this.shoppingListService.editIngredientSubject.subscribe((index) => this.onEditIngredient(index))
   }
   
   ngOnDestroy(): void {
-    this.shoppingListService.editIngredientSubject.unsubscribe()
+    this.editIngredientSubscription?.unsubscribe()
   }
   
   onSubmit() {
