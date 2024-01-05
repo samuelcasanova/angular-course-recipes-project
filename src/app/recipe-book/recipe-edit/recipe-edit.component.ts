@@ -46,6 +46,10 @@ export class RecipeEditComponent implements OnInit {
     (this.recipeForm.get('ingredients') as FormArray).push(this.getIngredientFormGroup(null, null))
   }
 
+  onDeleteIngredient(index: number) {
+    (this.recipeForm.get('ingredients') as FormArray).removeAt(index)
+  }
+
   private initForm() {
     const name = this.editMode ? this.recipe.name : ''
     const description = this.editMode ? this.recipe.description : ''
