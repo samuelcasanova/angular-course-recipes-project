@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Data, Params, Router } from '@angular/router';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 
@@ -20,13 +20,18 @@ export class RecipeEditComponent implements OnInit {
   constructor(private recipeService: RecipeService, private router: Router, private route: ActivatedRoute) {}
   
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.editMode = !!params['index'] 
-      this.index = +params['index']
-      this.recipe = this.recipeService.getRecipe(this.index)
+    this.route.data.subscribe((data: Data) => {
+      this.recipe = data['recipe']
+      this.editMode = true
       this.initForm()
     })
-    this.initForm()
+    // this.route.params.subscribe((params: Params) => {
+    //   this.editMode = !!params['index'] 
+    //   this.index = +params['index']
+    //   this.recipe = this.recipeService.getRecipe(this.index)
+    //   this.initForm()
+    // })
+    //this.initForm()
   }
   
   onSubmit() {
