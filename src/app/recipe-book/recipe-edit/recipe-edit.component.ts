@@ -20,6 +20,10 @@ export class RecipeEditComponent implements OnInit {
   constructor(private recipeService: RecipeService, private router: Router, private route: ActivatedRoute) {}
   
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.index = +params['index']
+    })
+
     this.route.data.subscribe((data: Data) => {
       this.recipe = data['recipe']
       this.editMode = true
