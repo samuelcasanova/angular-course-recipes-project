@@ -17,6 +17,18 @@ export class AuthService {
       .pipe(catchError(this.handleError.bind(this)), tap(this.handleAuthentication.bind(this)))
   }
 
+  autoLogin() {
+    const userData: {email: string, password: string, _token: string, _tokenExpirationDate: string} = JSON.parse(localStorage.getItem('userData'))
+    if (!userData) {
+      return
+    }
+    const { email, password, _token: token, _tokenExpirationDate: tokenExpirationDateString } = userData
+    const user = new User(email, password, token, new Date(tokenExpirationDateString))
+    if (user.token) {
+      this.userSubject.next(user)
+    }
+  }
+
   login(email: string, password: string) {
     const payload = { email, password, returnSecureToken: true }
     return this.httpClient
@@ -44,6 +56,7 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + +responseData.expiresIn * 1000)
     const user = new User(responseData.email, responseData.localId, responseData.idToken, expirationDate)
     this.userSubject.next(user)
+    localStorage.setItem('userData', JSON.stringify(user))
   }
 }
 
