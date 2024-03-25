@@ -7,10 +7,11 @@ import { EmptyRecipeDetailComponent } from "./recipe-book/empty-recipe-detail/em
 import { RecipeEditComponent } from "./recipe-book/recipe-edit/recipe-edit.component";
 import { RecipeResolver } from "./recipe-book/recipe-resolver.service";
 import { AuthComponent } from "./auth/auth.component";
+import { authGuard } from "./auth/auth.guard";
 
 const routes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
-  { path: 'recipes', component: RecipeBookComponent, children: [
+  { path: 'recipes', component: RecipeBookComponent, canActivate: [ authGuard ], children: [
     { path: '', component: EmptyRecipeDetailComponent },
     { path: 'new', component: RecipeEditComponent },
     { path: ':index', component: RecipeDetailComponent, resolve: { recipe: RecipeResolver } },

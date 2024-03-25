@@ -17,6 +17,13 @@ export class AuthService {
       .pipe(catchError(this.handleError.bind(this)), tap(this.handleAuthentication.bind(this)))
   }
 
+  login(email: string, password: string) {
+    const payload = { email, password, returnSecureToken: true }
+    return this.httpClient
+    .post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBu0_c21_FWKHGpNytOYFfUNwXUQLUMq7Y', payload)
+    .pipe(catchError(this.handleError.bind(this)), tap(this.handleAuthentication.bind(this)))
+  }
+
   autoLogin() {
     const userData: {email: string, password: string, _token: string, _tokenExpirationDate: string} = JSON.parse(localStorage.getItem('userData'))
     if (!userData) {
@@ -28,17 +35,11 @@ export class AuthService {
       this.userSubject.next(user)
     }
   }
-
-  login(email: string, password: string) {
-    const payload = { email, password, returnSecureToken: true }
-    return this.httpClient
-      .post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBu0_c21_FWKHGpNytOYFfUNwXUQLUMq7Y', payload)
-      .pipe(catchError(this.handleError.bind(this)), tap(this.handleAuthentication.bind(this)))
-  }
-
+  
   logout() {
     this.userSubject.next(null)
     this.router.navigate(['/auth'])
+    localStorage.removeItem('userData')
   }
 
   private handleError(errorResponse: HttpErrorResponse) {
