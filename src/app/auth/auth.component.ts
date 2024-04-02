@@ -12,13 +12,13 @@ export class AuthComponent {
   isLoginMode = true
   isLoading = false
   error = null
-
+  
   constructor(private authService: AuthService, private router: Router) {}
-
+  
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode
   }
-
+  
   onSubmit(authForm: NgForm) {
     this.isLoading = true
     console.log(authForm.value)
@@ -41,6 +41,10 @@ export class AuthComponent {
         this.error = error.message
         this.isLoading = false
       })
-    authForm.reset()
+      authForm.reset()
+  }
+  
+  onCloseErrorModal() {
+    this.error = null
   }
 }

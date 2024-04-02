@@ -21,6 +21,7 @@ import { RecipeEditComponent } from './recipe-book/recipe-edit/recipe-edit.compo
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './common/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { AlertComponent } from './common/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     EmptyRecipeDetailComponent,
     RecipeEditComponent,
     AuthComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
